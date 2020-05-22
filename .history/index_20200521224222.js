@@ -47,8 +47,10 @@ function createTimeOutEvent(employeeRecord, dateStamp){
 }
 
 function hoursWorkedOnDate(employeeRecord, date){
-    const TimeIn = employeeRecord.timeInEvents.find(function(TimeIn){
-       return TimeIn.date === date
+    // find the timeInEvent in employeeRecord's timeInEvents
+    // same for timeOut
+    const timeIn = employeeRecord.timeInEvents.find(function(timeIn){
+       return timeIn.date === date
     })
     const timeOut = employeeRecord.timeOutEvents.find(function(timeOut){
         return timeOut.date === date 
@@ -77,18 +79,5 @@ function allWagesFor(employeeRecord){
    })
     
    return total 
-}
-
-function findEmployeeByFirstName(srcArray, firstName){
-    return srcArray.find(function(employee){
-        return employee.firstName === firstName
-    })
-
-}
-
-function calculatePayroll(employeeRecords){ 
-    return employeeRecords.reduce(function(accumulator, employee){
-       return accumulator + allWagesFor(employee)
-    }, 0)
 
 }
