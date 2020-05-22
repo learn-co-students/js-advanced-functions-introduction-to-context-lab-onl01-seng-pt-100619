@@ -77,18 +77,5 @@ function allWagesFor(employeeRecord){
    })
     
    return total 
-}
-
-function findEmployeeByFirstName(srcArray, firstName){
-    return srcArray.find(function(employee){
-        return employee.firstName === firstName
-    })
-
-}
-
-function calculatePayroll(employeeRecords){ 
-    return employeeRecords.reduce(function(accumulator, employee){
-       return accumulator + allWagesFor(employee)
-    }, 0)
 
 }

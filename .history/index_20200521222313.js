@@ -37,58 +37,27 @@ function createTimeOutEvent(employeeRecord, dateStamp){
     // create and object
     let [date, hour] = dateStamp.split(' ')
     const clockOut = {
-    type: "TimeOut",
+    type: "TimeIn",
     hour: parseInt(hour, 10),
     date
     }
     //add the object to timeOutEvents
-    employeeRecord.timeOutEvents.push(clockOut)
+    employeeRecord.timeOutEvents.push(clockIn)
     return employeeRecord
 }
 
 function hoursWorkedOnDate(employeeRecord, date){
-    const TimeIn = employeeRecord.timeInEvents.find(function(TimeIn){
-       return TimeIn.date === date
+    // find the timeInEvent in employeeRecord's timeInEvents
+    // same for timeOut
+    const timeIn = employeeRecord.timeInEvents.find(function(timeIn){
+       return timeIn.date === date
+
     })
-    const timeOut = employeeRecord.timeOutEvents.find(function(timeOut){
+    const timeOut = employeeRecord.timeInEvents.find(function(timeOut){
         return timeOut.date === date 
      })
 
     //using that, we can calc hours worked
-   const hoursWorked = (timeOut.hour - TimeIn.hour) / 100
+   const hoursWorked = timeOut.hours - (TimeIn.hour) / 100
    return hoursWorked
-}
-
-function wagesEarnedOnDate(employeeRecord, date){
-    return hoursWorkedOnDate(employeeRecord, date) * employeeRecord.payPerHour
-
-}
-
-function allWagesFor(employeeRecord){
-    // find the available date 
-    const dates = employeeRecord.timeInEvents.map(function(event){
-       return event.date
-    })
-    
-   let total = 0 
-
-   dates.map(function(date){
-    total += wagesEarnedOnDate(employeeRecord, date)       
-   })
-    
-   return total 
-}
-
-function findEmployeeByFirstName(srcArray, firstName){
-    return srcArray.find(function(employee){
-        return employee.firstName === firstName
-    })
-
-}
-
-function calculatePayroll(employeeRecords){ 
-    return employeeRecords.reduce(function(accumulator, employee){
-       return accumulator + allWagesFor(employee)
-    }, 0)
-
 }

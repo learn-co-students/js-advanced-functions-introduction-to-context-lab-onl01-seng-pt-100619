@@ -80,7 +80,7 @@ function allWagesFor(employeeRecord){
 }
 
 function findEmployeeByFirstName(srcArray, firstName){
-    return srcArray.find(function(employee){
+    return srcArray.find(function(employeeRecord){
         return employee.firstName === firstName
     })
 

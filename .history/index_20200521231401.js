@@ -80,7 +80,7 @@ function allWagesFor(employeeRecord){
 }
 
 function findEmployeeByFirstName(srcArray, firstName){
-    return srcArray.find(function(employee){
+    return srcArray.find(function(employeeRecord){
         return employee.firstName === firstName
     })
 
@@ -88,7 +88,7 @@ function findEmployeeByFirstName(srcArray, firstName){
 
 function calculatePayroll(employeeRecords){ 
     return employeeRecords.reduce(function(accumulator, employee){
-       return accumulator + allWagesFor(employee)
+       return accumulator + allWagesFor(employeeRecord)
     }, 0)
 
 }
