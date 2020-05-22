@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A JavaScript lab",
   "main": "index.js",
-  "scripts": { "test": "mocha --timeout 35000 -R mocha-multi --reporter-options nyan=-,json=.results.json" } , 
+  "scripts": { "test": "mocha --timeout 25000 -R mocha-multi --reporter-options nyan=-,json=.results.json" } , 
   "author": "flatironschool",
   "license": "Included in Repo",
   "devDependencies": {
