@@ -17,7 +17,7 @@ function createEmployeeRecords(employeesArr) {
 function createTimeInEvent(employee, time) {
     employee.timeInEvents.push(
         {
-           type: 'timeIn',
+           type: 'TimeIn',
            hour: parseInt(time.slice(-4), 10),
            date: time.slice(0, 10)
         }
@@ -37,7 +37,31 @@ function createTimeOutEvent(employee, time) {
 }
 
 function hoursWorkedOnDate(employee, date) {
-    let timeIn = employee.timeInEvents.find(workDay => workDay.date === date)
-    let timeOut = employee.timeOutEvents.find(workDay => workDay.date === date)
-    return timeOut - timeIn
+    let timeIn = (employee.timeInEvents.find(workDay => workDay.date === date)).hour
+    let timeOut = (employee.timeOutEvents.find(workDay => workDay.date === date)).hour
+    return (timeOut - timeIn) / 100
+}
+
+function wagesEarnedOnDate(employee, date) {
+    let hours = hoursWorkedOnDate(employee, date)
+    return employee.payPerHour * hours
+}
+
+function allWagesFor(employee) {
+    let dates = employee.timeInEvents.map(event => {return event.date})
+   let wages = dates.map(element => wagesEarnedOnDate(employee, element))
+    return wages.reduce(function(element, runningTotal) {
+        return element + runningTotal
+    })
+}
+
+function calculatePayroll(employees) {
+    let wages = employees.map(employee => allWagesFor(employee))
+    return wages.reduce(function(wage, runningTotal) {
+        return wage + runningTotal
+    })
+}
+
+function findEmployeeByFirstName(employees, name) {
+    return employees.find(employee => employee.firstName === name)
 }
