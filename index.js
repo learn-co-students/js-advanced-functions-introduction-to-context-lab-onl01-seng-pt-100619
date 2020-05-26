@@ -131,14 +131,15 @@ function findEmployeeByFirstName(allEmployeeRecords, name){
 
 let calculatePayroll = function(records){
 
-    return records.reduce((acc, employee)=> {
-        return acc += allWagesFor(employee)
-    }, 0)
+    // return records.reduce((acc, employee)=> {
+    //     return acc += allWagesFor(employee)
+    // }, 0)
 
-    // let wagesArr = records.map(function(record){wagesArr.push(allWagesFor(record))})  // first make an array with all wages for each employee
 
-    // let expense = wagesArr.reduce(function(memo, wage){return memo += wage})
+    let wagesArr = records.map(function(record){return allWagesFor(record)})  // first make an array with all wages for each employee
 
-    // return expense;
+    let expense = wagesArr.reduce(function(memo, wage){return memo += wage}, 0)
+
+    return expense;
 
  }
